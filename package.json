@@ -1,0 +1,19 @@
+{
+  "name": "@itty-bitty-context/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nx/js": "21.2.1",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
+    "nx": "21.2.1",
+    "prettier": "^2.6.2",
+    "tslib": "^2.3.0",
+    "typescript": "~5.8.2"
+  },
+  "packageManager": "pnpm@9.0.5+sha512.a722575c18fd791f9ef71e387c6e16cc03c90d859b9b0998d0428ca0e3220828b32a96e6de73cea34edbc0f50824771b1a69c7ea36b86daa3b89c7e6d9a3d912"
+}
