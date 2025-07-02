@@ -1,2 +1,7 @@
-packages: 
-  - "packages/*"
+packages:
+  - 'packages/*'
+  - 'apps'
+  - 'apps-e2e'
+  - 'apps/*'
+  - 'libs'
+  - 'libs/*'

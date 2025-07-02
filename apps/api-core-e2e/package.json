@@ -1,0 +1,27 @@
+{
+  "name": "@itty-bitty-context/api-core-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "name": "api-core-e2e",
+    "implicitDependencies": [
+      "api-core"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/api-core-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "api-core:build",
+          "api-core:serve"
+        ]
+      }
+    }
+  }
+}
