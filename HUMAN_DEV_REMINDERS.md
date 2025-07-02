@@ -23,6 +23,9 @@ npm run build:web          # Just the web app
 npm run test               # All tests
 npm run test:api           # Just API tests
 npm run test:contracts     # Just contracts lib tests
+
+# Generate project context files
+npm run generate:context   # Create PROJECT_CONTEXT.md in each project folder
 ```
 
 ---
@@ -234,6 +237,18 @@ DELETE /api/items/:id          # Delete item
 - **Swagger docs are your friend** - always up-to-date API reference
 - **Path mapping is configured** - use `@/contracts` imports
 - **Tests should pass before commits** - CI will catch you if they don't
+
+## 📁 Working in Subfolders
+
+When opening just a project subfolder in VS Code (to keep context itty bitty!):
+
+- **Look for `PROJECT_CONTEXT.md`** - auto-generated context about the monorepo
+- **Each project folder has its own context file** with commands and links
+- **Run `npm run generate:context`** from root to update these files
+- **Links back to root docs** are included in each project context
+- **Files are auto-generated** - they're in `.gitignore` and created on build
+
+**Pro tip**: AI agents especially benefit from the PROJECT_CONTEXT.md files when working in subfolders!
 
 ---
 

@@ -95,6 +95,19 @@ This template is optimized for AI-assisted development:
 - **Predictable file structure** and import paths
 - **Comprehensive inline documentation** and TODO comments
 - **Agent development rules** for consistent code quality
+- **Project context files** - Each subfolder has a `PROJECT_CONTEXT.md` explaining the monorepo structure
+
+### 📁 Subfolder Development
+
+Work in individual project folders while maintaining monorepo context:
+
+```bash
+# Generate context files for each project
+npm run generate:context
+
+# Then open any project folder in VS Code
+# Each will have a PROJECT_CONTEXT.md with monorepo info
+```
 
 ## 🔗 API Documentation
 

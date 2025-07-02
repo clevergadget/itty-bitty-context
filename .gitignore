@@ -34,6 +34,14 @@ yarn-error.log
 testem.log
 /typings
 
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
 # System Files
 .DS_Store
 Thumbs.db
@@ -44,3 +52,6 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 
 test-output
+
+# Auto-generated project context files
+**/PROJECT_CONTEXT.md
