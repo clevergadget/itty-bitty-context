@@ -1,0 +1,166 @@
+/* AI-Friendly CSS Module - Minimal, predictable styling */
+
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 1rem;
+}
+
+.header h1 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.header p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.error {
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #900;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.formSection {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.formSection h2 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.listSection {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.listSection h2 {
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+.itemContent {
+  flex: 1;
+}
+
+.itemContent h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
+}
+
+.itemContent p {
+  margin: 0 0 0.5rem 0;
+  color: #666;
+}
+
+.itemContent small {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.itemActions {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.editButton,
+.deleteButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background: #fff;
+  border-color: #007acc;
+  color: #007acc;
+}
+
+.editButton:hover {
+  background: #e6f3ff;
+}
+
+.deleteButton {
+  background: #fff;
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.deleteButton:hover {
+  background: #ffe6e6;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .app {
+    padding: 0.5rem;
+  }
+  
+  .itemCard {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .itemActions {
+    margin-left: 0;
+    align-self: stretch;
+  }
+  
+  .editButton,
+  .deleteButton {
+    flex: 1;
+  }
+}

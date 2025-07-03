@@ -13,6 +13,13 @@ async function bootstrap() {
   const globalPrefix = 'api';
   app.setGlobalPrefix(globalPrefix);
   
+  // Enable CORS for development
+  app.enableCors({
+    origin: ['http://localhost:5173', 'http://localhost:4200'], // Vite and Angular dev servers
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
+  
   // Enable validation pipes with consistent error format
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,

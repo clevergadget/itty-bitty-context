@@ -242,13 +242,16 @@ DELETE /api/items/:id          # Delete item
 
 When opening just a project subfolder in VS Code (to keep context itty bitty!):
 
-- **Look for `PROJECT_CONTEXT.md`** - auto-generated context about the monorepo
-- **Each project folder has its own context file** with commands and links
+- **Look for the 4 context files** - auto-generated context about the monorepo:
+  - `PROJECT_OVERVIEW.md` - What this project is and why you're here
+  - `MONOREPO_CONTEXT.md` - How this fits in the bigger picture  
+  - `COMMANDS.md` - What you can run and how
+  - `DEPENDENCIES.md` - What this connects to
 - **Run `npm run generate:context`** from root to update these files
 - **Links back to root docs** are included in each project context
-- **Files are auto-generated** - they're in `.gitignore` and created on build
+- **Files are auto-generated** but committed to help AI agents
 
-**Pro tip**: AI agents especially benefit from the PROJECT_CONTEXT.md files when working in subfolders!
+**Pro tip**: AI agents especially benefit from these context files when working in subfolders - they explain the constraints and "why you can't just install things"!
 
 ---
 
