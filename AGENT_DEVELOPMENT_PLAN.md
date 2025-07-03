@@ -52,14 +52,10 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 - [ ] Create example e2e tests showing API usage
 - [ ] Add development environment setup documentation
 
-
 #### 4. **Documentation & Examples** 🔧
-- [x] Add comprehensive README with quick start guide
+- [ ] Add comprehensive README with quick start guide
 - [ ] Create example business logic (beyond basic CRUD)
 - [ ] Add example of real-world API patterns
-
-#### 6. **Frontend Micro-Frontend Architecture** 🚀
-- [ ] Refactor Vite frontend into a micro frontend with 3 parts (e.g., Items, Examples, Dashboard modules)
 
 #### 5. **Production Readiness** 🔧
 - [ ] Add Docker setup for containerization
@@ -70,7 +66,6 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 
 ## 🚀 Next Actions
 
-
 ### Immediate (This Session)
 1. ✅ ~~Fix path mapping issues~~ - TypeScript path mapping is working
 2. ✅ ~~Standardize on Items API~~ - Removed Users, kept Items only
@@ -78,11 +73,11 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 4. ✅ ~~Test that the API server starts and Swagger docs are accessible~~ - Build system verified
 5. ✅ ~~Update README to reflect current state and AI-friendly features~~
 
-
 ### Soon (Next Session) 🚀
-1. Add OpenAPI client generation for type-safe API calls (if not already complete)
-2. Add example business logic and real-world API patterns
-3. Refactor Vite frontend into a micro frontend with 3 parts (e.g., Items, Examples, Dashboard modules)
+1. **Frontend Integration** - Replace default Vite app with Items management UI
+2. Create proper forms and list views for the Items API
+3. Add API service layer for frontend-backend communication
+4. Add OpenAPI client generation for type-safe API calls
 
 ### Later (Future Sessions)
 1. Add database layer (SQLite)
