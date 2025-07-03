@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently --kill-others --prefix \"[{name}]\" --names \"api,web\" \"nx serve api-core\" \"nx serve web-shell\"",
-    "dev:api": "nx serve api-core",
-    "dev:web": "nx serve web-shell",
+    "dev:api": "nx serve api-core &",
+    "dev:web": "nx serve web-shell &",
     "build": "npm run generate:context && nx build api-core && nx build web-shell",
     "build:api": "nx build api-core",
     "build:web": "nx build web-shell",
@@ -14,7 +14,8 @@
     "test:contracts": "nx test contracts",
     "lint": "nx lint api-core && nx lint web-shell && nx lint contracts",
     "typecheck": "nx typecheck api-core && nx typecheck contracts",
-    "generate:context": "node scripts/generate-project-context.js"
+    "generate:context": "node scripts/generate-project-context.js",
+    "kill": "lsof -ti:3000,4200 | xargs kill -9 2>/dev/null || true"
   },
   "private": true,
   "devDependencies": {

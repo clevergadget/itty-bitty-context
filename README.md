@@ -41,13 +41,18 @@ This template provides a production-ready foundation with conventions that help 
 
 ### Development
 ```bash
-# Start API server (with Swagger docs at http://localhost:3000/api/docs)
+# Start API server (runs in background, Swagger docs at http://localhost:3000/api/docs)
 npm run dev:api
 
-# Start frontend (React + Vite)
+# Start frontend (runs in background, React + Vite at http://localhost:4200)
 npm run dev:web
 
-# Start both concurrently
+# Start both concurrently (interactive mode)
+npm run dev
+
+# Stop all running servers
+npm run stop
+```
 npm run dev
 ```
 

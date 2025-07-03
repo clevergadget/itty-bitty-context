@@ -62,6 +62,9 @@ This document outlines the conventions and practices for this template repositor
 - **Consistent package manager**: Use pnpm throughout
 - **Nx workspace structure** for scalability and tooling
 - **Clear build/dev scripts** in each package.json
+- **Background dev servers**: `npm run dev:api` and `npm run dev:web` run in background with `&`
+- **Easy cleanup**: Use `npm run stop` to kill servers on ports 3000 and 4200
+- **Non-blocking terminals**: Development servers shouldn't block the terminal - agents need to continue working
 
 ## 🤖 Agent Workflow Optimizations
 
