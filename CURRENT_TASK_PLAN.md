@@ -56,11 +56,13 @@ apps/
     └── Keep temporarily for reference
 ```
 
-### Module Federation Strategy
-- **Shell Host**: Webpack Module Federation host that loads remote MFEs
+### Hybrid Build Strategy (Vite + Webpack)
+- **Development**: Continue using Vite for fast development and HMR
+- **Production/MFE**: Use Webpack Module Federation for runtime composition
+- **Shell Host**: Webpack Module Federation host that loads remote MFEs  
 - **Items MFE**: Webpack Module Federation remote that exposes Items functionality
 - **Shared Dependencies**: React, React-DOM shared between shell and MFEs
-- **Independent Builds**: Each MFE builds and deploys independently
+- **Best of Both Worlds**: Fast development (Vite) + Runtime composition (Webpack)
 
 ### Shared Libraries
 ```
@@ -78,74 +80,106 @@ libs/
 
 ## 📝 Detailed Implementation Plan
 
+### Phase 0: Hybrid Build Verification (Session 0) 🧪
+**Goal**: Verify that we can successfully use both Vite and Webpack in the same Nx workspace for different purposes
+
+#### 0.1 Current Setup Validation
+- [ ] Verify existing Vite setup works for web-shell development
+- [ ] Verify existing Webpack setup works for api-core builds
+- [ ] Document current working configurations as baseline
+
+#### 0.2 Webpack for Frontend Experiment
+- [ ] Create a simple test React app using Webpack in the workspace
+- [ ] Verify it can coexist with Vite-based web-shell
+- [ ] Test that both can run simultaneously during development
+- [ ] Validate build outputs and deployment scenarios
+
+#### 0.3 Module Federation Proof of Concept
+- [ ] Create minimal Module Federation host using Webpack
+- [ ] Create minimal Module Federation remote using Webpack  
+- [ ] Test runtime composition works correctly
+- [ ] Document any conflicts or configuration challenges
+
+#### 0.4 Hybrid Development Workflow
+- [ ] Establish workflow for developing with Vite during iteration
+- [ ] Establish process for building with Webpack for MFE production
+- [ ] Test that TypeScript, ESLint, and other tools work with both
+- [ ] Document the hybrid approach for future developers
+
 ### Phase 1: Foundation Setup (Session 1)
-**Goal**: Create the basic MFE infrastructure without breaking existing functionality
+**Goal**: Create the basic MFE infrastructure using validated hybrid approach
 
 #### 1.1 Create Shell Host Application
-- [ ] Generate new Nx app: `shell-host`
+- [ ] Generate new Nx app: `shell-host` 
+- [ ] Set up dual configuration: Vite for development, Webpack for MFE production
 - [ ] Configure Webpack Module Federation as host
 - [ ] Set up basic routing with React Router
 - [ ] Create minimal layout with navigation placeholder
-- [ ] Configure to load Items MFE at runtime
+- [ ] Test development mode (Vite) and MFE mode (Webpack) work independently
 
 #### 1.2 Create Items MFE Application  
 - [ ] Generate new Nx app: `items-mfe`
+- [ ] Set up dual configuration: Vite for development, Webpack for MFE production
 - [ ] Configure Webpack Module Federation as remote
-- [ ] Copy Items functionality from web-shell:
-  - [ ] ItemForm component
-  - [ ] API service layer
-  - [ ] Items management logic
+- [ ] Copy Items functionality from web-shell for initial testing
 - [ ] Expose Items module through Module Federation
+- [ ] Test standalone development and MFE remote modes
 
-#### 1.3 Configure Module Federation
-- [ ] Install `@nx/webpack` and Module Federation plugins
-- [ ] Configure webpack configs for host/remote setup
-- [ ] Set up shared dependencies (React, React-DOM)
-- [ ] Test that Items MFE loads in Shell Host
+#### 1.3 Integration & Validation
+- [ ] Test that Items MFE loads correctly in Shell Host (Webpack mode)
+- [ ] Verify development workflow: develop in Vite, compose with Webpack
+- [ ] Test hot reloading works in development mode
+- [ ] Validate build outputs and runtime behavior
 
 ### Phase 2: Feature Migration (Session 2)
-**Goal**: Move all Items functionality to the MFE and verify full functionality
+**Goal**: Complete the Items functionality migration using the validated hybrid approach
 
 #### 2.1 Complete Items MFE Implementation
-- [ ] Move all Items-related components from web-shell
-- [ ] Copy and adapt API service layer
+- [ ] Migrate all Items-related components from web-shell to items-mfe
+- [ ] Set up proper development mode using Vite for fast iteration
+- [ ] Copy and adapt API service layer with proper typing
 - [ ] Implement Items routing within the MFE
 - [ ] Add error boundaries specific to Items functionality
-- [ ] Test Items CRUD operations in isolation
+- [ ] Test Items CRUD operations in both Vite dev mode and Webpack MFE mode
 
 #### 2.2 Shell Host Integration
-- [ ] Implement navigation to Items section
-- [ ] Set up routing to load Items MFE
+- [ ] Implement navigation to Items section using Shell's Vite dev mode
+- [ ] Set up routing to load Items MFE (Webpack production mode)
 - [ ] Add loading states for MFE initialization
 - [ ] Implement error handling for MFE failures
-- [ ] Test full integration flow
+- [ ] Test full integration flow: Shell (Vite) + Items MFE (Webpack)
+- [ ] Verify development workflow is smooth and performant
 
 #### 2.3 Shared Libraries Creation
 - [ ] Extract common UI components to `shared-ui`
 - [ ] Create MFE utilities in `mfe-utils`
+- [ ] Ensure shared libraries work with both Vite and Webpack builds
 - [ ] Update both apps to use shared libraries
-- [ ] Verify builds and runtime functionality
+- [ ] Verify builds and runtime functionality in all configurations
 
-### Phase 3: Production Readiness (Session 3)
-**Goal**: Polish the MFE setup for production use and documentation
+### Phase 3: Production Readiness & Documentation (Session 3)
+**Goal**: Polish the hybrid Vite + Webpack MFE setup for production use
 
 #### 3.1 Build & Development Optimization
-- [ ] Configure Nx build targets for all apps
-- [ ] Set up development mode with hot reloading
+- [ ] Optimize Nx build targets for all apps (both Vite and Webpack modes)
+- [ ] Fine-tune development workflow: Vite for iteration, Webpack for testing MFE integration
 - [ ] Optimize shared dependencies and bundle sizes
-- [ ] Add build validation and testing
+- [ ] Add build validation and testing for both build systems
+- [ ] Create efficient CI/CD pipeline supporting dual build approach
 
 #### 3.2 Documentation & Developer Experience
-- [ ] Update README with MFE architecture explanation
-- [ ] Create MFE development guidelines
-- [ ] Add troubleshooting documentation
-- [ ] Update agent development rules for MFE patterns
+- [ ] Update README with hybrid Vite + Webpack MFE architecture explanation
+- [ ] Create comprehensive MFE development guidelines
+- [ ] Document when to use Vite vs Webpack during development
+- [ ] Add troubleshooting documentation for dual build system
+- [ ] Update agent development rules for hybrid MFE patterns
 
 #### 3.3 Testing & Validation
-- [ ] Add integration tests for MFE loading
-- [ ] Test Items functionality in both development and build modes
+- [ ] Add integration tests for MFE loading (Webpack mode)
+- [ ] Add unit tests that work in both Vite and Webpack environments
+- [ ] Test Items functionality in all modes: Vite dev, Webpack dev, Webpack MFE
 - [ ] Validate error scenarios and fallbacks
-- [ ] Performance testing for MFE loading
+- [ ] Performance testing comparing Vite dev vs Webpack dev vs MFE runtime
 
 ## 🎯 End State Definition
 
@@ -166,6 +200,7 @@ apps/
 │   │   ├── App.tsx               # Shell layout & routing
 │   │   ├── navigation/           # Navigation components
 │   │   └── mfe-loader/           # MFE loading utilities
+│   ├── vite.config.ts            # Vite for development
 │   ├── webpack.config.js         # Module Federation host config
 │   └── package.json
 ├── items-mfe/
@@ -174,30 +209,31 @@ apps/
 │   │   ├── App.tsx               # Items app
 │   │   ├── components/           # Items components
 │   │   └── services/             # API services
+│   ├── vite.config.ts            # Vite for development
 │   ├── webpack.config.js         # Module Federation remote config
 │   └── package.json
 └── web-shell/ (deprecated)       # Keep for reference during transition
 ```
 
-### Runtime Behavior
-1. User navigates to `http://localhost:4200`
-2. Shell Host loads with navigation menu
-3. User clicks "Items" in navigation
-4. Shell dynamically loads Items MFE from `http://localhost:4201`
-5. Items functionality works identically to current implementation
-6. User can navigate back to shell or to future MFEs
-
-### Development Workflow
+### Hybrid Development Workflow
 ```bash
-# Start shell host
-npm run dev:shell
+# Fast development mode (Vite) - Individual MFE development
+npm run dev:shell       # Shell development with Vite HMR
+npm run dev:items       # Items development with Vite HMR
 
-# Start items MFE (in parallel)
-npm run dev:items
+# MFE integration mode (Webpack) - Testing MFE composition
+npm run dev:shell:mfe   # Shell as MFE host
+npm run dev:items:mfe   # Items as MFE remote
 
-# Or start everything
-npm run dev:mfe
+# Full integration testing
+npm run dev:mfe         # Start all MFEs in integration mode
 ```
+
+### Dual Build Configuration Benefits
+- **Fast Development**: Vite's instant HMR for rapid iteration
+- **MFE Testing**: Webpack Module Federation for integration testing
+- **Production Ready**: Optimized Webpack builds for deployment
+- **Best of Both**: Combine speed of Vite with power of Module Federation
 
 ## 🚧 Risk Mitigation
 

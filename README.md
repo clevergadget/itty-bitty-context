@@ -27,15 +27,22 @@ This template provides a production-ready foundation with conventions that help 
 
 ## 🎯 Next Steps
 
-### Immediate
-1. Add OpenAPI client generation for the frontend
-2. Create a proper frontend UI that consumes the Items API
-3. Replace default Vite app with actual items management interface
+### Immediate - MFE Architecture Implementation 🏗️
+1. **Phase 0**: Verify hybrid Vite + Webpack approach works in Nx workspace
+2. **Phase 1**: Create Shell Host and Items MFE with dual build configurations
+3. **Phase 2**: Complete Items functionality migration using validated hybrid approach
+4. **Phase 3**: Production readiness and comprehensive documentation
+
+### Current Focus: Hybrid Build Strategy
+- **Development**: Use Vite for fast development and hot module replacement
+- **Production/MFE**: Use Webpack Module Federation for runtime composition
+- **Best of Both**: Combine speed of Vite development with power of Module Federation
 
 ### Soon
-1. Add database integration example (SQLite for simplicity)
-2. Create example e2e tests showing API usage
-3. Add development environment setup documentation
+1. Add second MFE for demonstration (Settings, Dashboard, etc.)
+2. Create shared UI component library across MFEs  
+3. Add comprehensive testing strategies for MFE applications
+4. Document advanced MFE patterns and deployment strategies
 
 ## 🚀 Quick Start
 
