@@ -127,6 +127,17 @@ When running the API server, visit:
 3. **Frontend**: Consume the API using generated or manual client code
 4. **Test**: Write tests for both API endpoints and business logic
 
+## 📚 AI Agent Documentation
+
+**For Humans**: This repo includes comprehensive documentation designed for AI agents, but useful for human developers too:
+
+- **`AGENT_DEVELOPMENT_RULES.md`** - Coding conventions and best practices optimized for AI assistance
+- **`AGENT_DEVELOPMENT_PLAN.md`** - Current project status, roadmap, and what's working vs. what's missing  
+- **Project Context Files** - Generated `PROJECT_CONTEXT.md` files in each subfolder explain the monorepo structure
+- **MCP Instructions** - `.github/instructions/nx.instructions.md` provides AI agents with Nx-specific guidelines (auto-generated)
+
+These files help ensure consistent, predictable development patterns whether you're working with AI assistants or onboarding new team members.
+
 ---
 
 **Fork this repo to bootstrap your next AI-assisted project!**
