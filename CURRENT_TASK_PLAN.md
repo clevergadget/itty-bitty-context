@@ -226,7 +226,32 @@ module.exports = {
 - [ ] Validate error scenarios and fallbacks
 - [ ] Performance testing comparing Vite dev vs Webpack dev vs MFE runtime
 
-## 🎯 End State Definition
+
+### Phase 4: Workspace Cleanup & Legacy Removal (Session 4)
+**Goal**: Remove deprecated files, obsolete configs, and ensure a clean, maintainable workspace after MFE migration.
+
+#### 4.1 Remove Deprecated Applications & Files
+- [ ] Remove `web-shell` app and all related files
+- [ ] Remove any temporary/test React apps created for hybrid/webpack experiments
+- [ ] Remove obsolete configs (e.g., old Vite/Webpack configs not used by shell-host/items-mfe)
+- [ ] Remove any temporary scripts or assets used for migration
+
+#### 4.2 Update Documentation & References
+- [ ] Update all docs to remove references to deprecated apps/configs
+- [ ] Ensure README and onboarding docs reflect the new MFE structure
+- [ ] Add a migration note for future reference
+
+#### 4.3 Final Workspace Validation
+- [ ] Validate Nx project graph is clean (no orphaned projects)
+- [ ] Validate all build/test/lint targets work as expected
+- [ ] Confirm only new MFE apps and shared libs remain
+
+**Files to clean up after migration:**
+- `apps/web-shell/` (entire directory)
+- Any test React app(s) created in Phase 0.2 (e.g., `apps/test-react-webpack/`)
+- Old configs: `apps/web-shell/vite.config.ts`, `apps/api-core/webpack.config.js` (if replaced)
+- Temporary scripts/assets used for migration
+
 
 ### Success Criteria
 1. **Shell Host** runs on port 4200 with navigation
