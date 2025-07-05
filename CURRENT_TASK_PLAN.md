@@ -83,10 +83,55 @@ libs/
 ### Phase 0: Hybrid Build Verification (Session 0) 🧪
 **Goal**: Verify that we can successfully use both Vite and Webpack in the same Nx workspace for different purposes
 
+
 #### 0.1 Current Setup Validation
-- [ ] Verify existing Vite setup works for web-shell development
-- [ ] Verify existing Webpack setup works for api-core builds
-- [ ] Document current working configurations as baseline
+- [x] Verify existing Vite setup works for web-shell development
+- [x] Verify existing Webpack setup works for api-core builds
+- [x] Document current working configurations as baseline
+
+---
+### 📋 Baseline Working Configurations (Phase 0.1)
+
+#### Vite config for `web-shell` (`apps/web-shell/vite.config.ts`)
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@/contracts': path.resolve(__dirname, '../../libs/contracts/src/index.ts'),
+    },
+  },
+})
+```
+
+#### Webpack config for `api-core` (`apps/api-core/webpack.config.js`)
+```javascript
+const { NxAppWebpackPlugin } = require('@nx/webpack/app-plugin');
+const { join } = require('path');
+
+module.exports = {
+  output: {
+    path: join(__dirname, 'dist'),
+  },
+  plugins: [
+    new NxAppWebpackPlugin({
+      target: 'node',
+      compiler: 'tsc',
+      main: './src/main.ts',
+      tsConfig: './tsconfig.app.json',
+      assets: ['./src/assets'],
+      optimization: false,
+      outputHashing: 'none',
+      generatePackageJson: true,
+    }),
+  ],
+};
+```
 
 #### 0.2 Webpack for Frontend Experiment
 - [ ] Create a simple test React app using Webpack in the workspace
