@@ -1,6 +1,15 @@
 # 📋 Agent Development Plan
 
-## 🎯 What This Repo Is
+## ### What's Missing
+
+#### 1. **MFE Architecture Implementation** 🏗️ **CURRENT FOCUS**
+- [ ] Transform web-shell into Shell Host + Items MFE architecture
+- [ ] Implement Webpack Module Federation for runtime composition
+- [ ] Create shared libraries for common UI components
+- [ ] Establish patterns for cross-MFE communication
+- [ ] Document MFE development workflow
+
+#### 2. **Extended MFE Ecosystem** 🔧s Repo Is
 
 **Itty Bitty Context** is a forkable boilerplate repository designed to be maximally effective for AI-assisted development. This template provides a production-ready foundation with conventions that help AI agents understand, navigate, and modify code efficiently.
 
@@ -43,46 +52,62 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 - [ ] Display items list with Delete functionality
 
 #### 2. **API Client Generation** 🔧
-- [ ] Add OpenAPI client generation for frontend
-- [ ] Create `npm run generate:client` script
+- [ ] Add second MFE for demonstration (Settings, Dashboard, etc.)
+- [ ] Create shared UI component library across MFEs
+- [ ] Implement state management patterns for MFE communication
+- [ ] Add MFE-specific testing and e2e test strategies
+
+#### 3. **API Client Generation** 🔧
+- [ ] Add OpenAPI client generation for MFEs
+- [ ] Create `npm run generate:client` script  
 - [ ] Set up automated type sync between backend and frontend
 
-#### 3. **Enhanced Development Workflow** 🔧
+#### 4. **Enhanced Development Workflow** 🔧
 - [ ] Add database integration example (SQLite for simplicity)
-- [ ] Create example e2e tests showing API usage
-- [ ] Add development environment setup documentation
+- [ ] Create example e2e tests showing MFE integration
+- [ ] Add comprehensive development environment setup documentation
+- [ ] Create debugging tools for MFE runtime issues
 
-#### 4. **Documentation & Examples** 🔧
-- [ ] Add comprehensive README with quick start guide
-- [ ] Create example business logic (beyond basic CRUD)
-- [ ] Add example of real-world API patterns
+#### 5. **Documentation & Examples** 🔧
+- [ ] Add comprehensive MFE architecture documentation
+- [ ] Create example business logic beyond basic CRUD
+- [ ] Add example of real-world MFE communication patterns
+- [ ] Document deployment strategies for MFE applications
 
-#### 5. **Production Readiness** 🔧
+#### 6. **Production Readiness** 🔧
 - [ ] Add Docker setup for containerization
 - [ ] Environment configuration management
 - [ ] Build optimization and deployment scripts
 
 ---
 
-## 🚀 Next Actions
+## 🚀 Current Focus
 
-### Immediate (This Session)
-1. ✅ ~~Fix path mapping issues~~ - TypeScript path mapping is working
-2. ✅ ~~Standardize on Items API~~ - Removed Users, kept Items only
-3. ✅ ~~Verify builds and tests pass~~ - All tests and builds working
-4. ✅ ~~Test that the API server starts and Swagger docs are accessible~~ - Build system verified
-5. ✅ ~~Update README to reflect current state and AI-friendly features~~
+**See `CURRENT_TASK_PLAN.md` for detailed implementation plan of current task.**
 
-### Soon (Next Session) 🚀
-1. **Frontend Integration** - Replace default Vite app with Items management UI
-2. Create proper forms and list views for the Items API
-3. Add API service layer for frontend-backend communication
-4. Add OpenAPI client generation for type-safe API calls
+### Active Task: MFE Architecture Transition 🏗️
+**Status**: Planning Complete  
+**Goal**: Transform web-shell into 2-item Micro Frontend architecture (Shell + Items MFE)  
+**Why**: Demonstrate scalable patterns for AI-assisted development with clear separation of concerns
 
-### Later (Future Sessions)
-1. Add database layer (SQLite)
-2. Create more realistic business logic examples
-3. Add authentication and authorization patterns
+### Next Major Milestones
+
+#### 1. **MFE Foundation** (Current) 🏗️
+- [ ] Create Shell Host application with Module Federation
+- [ ] Extract Items functionality into dedicated MFE
+- [ ] Establish runtime composition patterns
+
+#### 2. **Enhanced MFE Ecosystem** 🔧
+- [ ] Add second MFE (e.g., Settings, Dashboard)
+- [ ] Create shared UI component library
+- [ ] Implement cross-MFE communication patterns
+- [ ] Add MFE-specific testing strategies
+
+#### 3. **Production Patterns** 🚀
+- [ ] Add authentication across MFEs
+- [ ] Implement deployment strategies for independent MFEs
+- [ ] Create monitoring and observability for MFE performance
+- [ ] Add advanced error handling and fallback mechanisms
 
 ---
 
