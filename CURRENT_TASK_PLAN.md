@@ -2,7 +2,7 @@
 
 ## Phase 1: Research & Setup
 
-### 1.1 Gemini CLI Overview & Installation
+### 1.1 Gemini CLI Overview & Installation DONE
 
 * **Identify the correct package**: Use `@google/gemini-cli` (not `@google-ai/generativelanguage`).
 * **Verify system requirements**: Ensure Node.js v20+ is installed.
@@ -15,7 +15,7 @@
   * Run `gemini --help`
   * Run a sample prompt: `gemini "Hello, world?"`
 
-### 1.2 Authentication & Configuration
+### 1.2 Authentication & Configuration NEXT
 
 * **Obtain API credentials**:
 
