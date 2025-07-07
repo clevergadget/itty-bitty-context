@@ -1,209 +1,264 @@
-# Task Plan: Add Gemini CLI Integration for AGENT_IMPLEMENTATION_TASK.md Processing
+# Integrate Google Gemini CLI for `AGENT_IMPLEMENTATION_TASK.md` Processing
 
-## Overview
-Integrate Google's Gemini CLI into the project to automatically discover and process `AGENT_IMPLEMENTATION_TASK.md` files throughout the repository. This will enable automated AI-assisted task processing for agent implementation workflows.
+## Phase 1: Research & Setup
 
-## Phase 1: Research and Setup Requirements
+### 1.1 Gemini CLI Overview & Installation
 
-### 1.1 Gemini CLI Investigation
-- [ ] Research Google Gemini CLI installation methods and requirements
-- [ ] Identify the correct CLI package (likely `@google-ai/generativelanguage` or similar)
-- [ ] Document authentication requirements (API keys, service accounts, etc.)
-- [ ] Test CLI command structure for non-interactive/programmatic usage
-- [ ] Identify flags for:
-  - Non-interactive mode (likely `--no-chat` or `--batch`)
-  - Input file specification
-  - Output format options
-  - Model selection options
+* **Identify the correct package**: Use `@google/gemini-cli` (not `@google-ai/generativelanguage`).
+* **Verify system requirements**: Ensure Node.js v20+ is installed.
+* **Install the CLI**:
 
-### 1.2 Authentication Setup
-- [ ] Create `.env.example` file with required environment variables
-- [ ] Document API key setup process in README
-- [ ] Add environment variable validation to startup scripts
-- [ ] Consider using local `.geminirc` or similar config files
+  * Locally: `npm install @google/gemini-cli`
+  * Globally: `npm install -g @google/gemini-cli`
+* **Test the CLI**:
+
+  * Run `gemini --help`
+  * Run a sample prompt: `gemini "Hello, world?"`
+
+### 1.2 Authentication & Configuration
+
+* **Obtain API credentials**:
+
+  * Generate a Gemini API key from Google AI Studio.
+* **Set up environment variables**:
+
+  ```bash
+  GEMINI_API_KEY=your_api_key_here
+  ```
+* **Interactive login (optional)**:
+
+  * If no API key is set, CLI prompts for sign-in.
+* **Model configuration**:
+
+  * Default: Gemini 2.5 Pro.
+  * Use `--model <model_name>` to override.
+* **Optional parameters**:
+
+  * Customize with `--temperature`, etc.
+  * Can read from env vars like `GEMINI_TEMPERATURE`, `GEMINI_MAX_TOKENS`.
 
 ## Phase 2: Core Implementation
 
-### 2.1 Package Installation and Configuration
-- [ ] Add Gemini CLI to `package.json` dependencies
-- [ ] Update `.gitignore` to exclude sensitive config files
-- [ ] Create configuration file structure:
-  ```
-  config/
-    gemini/
-      cli-config.json
-      prompts/
-        default-agent-task.md
-  ```
+### 2.1 Integrating Gemini CLI into the Project
+
+* **Add to dependencies**:
+
+  * `@google/gemini-cli`, `glob`, `chalk`, `yargs`
+* **Update `.gitignore`**:
+
+  * Ignore `.env`, `results/`, etc.
 
 ### 2.2 File Discovery Script
-Create `scripts/find-agent-tasks.js`:
-- [ ] Implement recursive directory traversal
-- [ ] Search for files named exactly `AGENT_IMPLEMENTATION_TASK.md`
-- [ ] Return array of absolute file paths
-- [ ] Add filtering options (exclude node_modules, .git, etc.)
-- [ ] Include error handling for permission issues
 
-### 2.3 Gemini CLI Wrapper
-Create `scripts/gemini-processor.js`:
-- [ ] Implement CLI command execution wrapper
-- [ ] Handle authentication and configuration
-- [ ] Process single file with appropriate flags
-- [ ] Capture and format output
-- [ ] Implement error handling and retry logic
-- [ ] Add logging for debugging
+* **Create `scripts/find-agent-tasks.js`**:
+
+  * Use `glob("**/AGENT_IMPLEMENTATION_TASK.md")`
+  * Handle errors gracefully
+  * Support dry-run mode for verification
+
+### 2.3 Gemini CLI Processing Wrapper
+
+* **Create `scripts/gemini-processor.js`**:
+
+  * Use `@<file_path>` syntax in prompt: `gemini -p "@path/to/file.md"`
+  * Execute via `child_process.spawn` or `exec`
+  * Capture stdout and stderr
+  * Return structured result object:
+
+    ```json
+    {
+      "file": "src/path/to/file.md",
+      "success": true,
+      "output": "...",
+      "durationMs": 1234
+    }
+    ```
+  * Handle retries and transient failures
 
 ### 2.4 Main Orchestration Script
-Create `scripts/process-agent-tasks.js`:
-- [ ] Integrate file discovery and Gemini processing
-- [ ] Process files sequentially or in parallel (configurable)
-- [ ] Generate summary report of processing results
-- [ ] Handle partial failures gracefully
-- [ ] Provide progress indicators
 
-## Phase 3: NPM Scripts and Commands
+* **Create `scripts/process-agent-tasks.js`**:
 
-### 3.1 Add New Package.json Scripts
-- [ ] `"gemini:install"`: Install and configure Gemini CLI
-- [ ] `"gemini:auth"`: Guide through authentication setup
-- [ ] `"find-agent-tasks"`: Discovery only (dry run)
-- [ ] `"process-agent-tasks"`: Full processing pipeline
-- [ ] `"process-agent-tasks:watch"`: Watch mode for continuous processing
+  * Import file list
+  * Default sequential processing
+  * Optional `--parallel` flag
+  * Log progress using `chalk`
+  * Save outputs in `results/`
+  * Aggregate errors and output summary
+  * Support `--dry-run`
 
-### 3.2 Command Options and Flags
-Design CLI interface:
-```bash
-npm run process-agent-tasks
-npm run process-agent-tasks -- --dry-run
-npm run process-agent-tasks -- --parallel
-npm run process-agent-tasks -- --output-dir ./results
-npm run process-agent-tasks -- --model gemini-pro
+## Phase 3: NPM Scripts & CLI Usage
+
+### 3.1 Add Scripts to `package.json`
+
+```json
+{
+  "scripts": {
+    "gemini:auth": "gemini",
+    "find-agent-tasks": "node scripts/find-agent-tasks.js",
+    "process-agent-tasks": "node scripts/process-agent-tasks.js",
+    "process-agent-tasks:parallel": "node scripts/process-agent-tasks.js --parallel",
+    "process-agent-tasks:watch": "nodemon scripts/process-agent-tasks.js"
+  }
+}
 ```
 
-## Phase 4: Output and Reporting
+### 3.2 Script Options and Flags
 
-### 4.1 Output Structure
-- [ ] Create standardized output directory structure:
-  ```
-  results/
-    agent-tasks/
-      YYYY-MM-DD-HH-mm-ss/
-        summary.json
-        processed/
-          path-to-file-1.md
-          path-to-file-2.md
-        errors/
-          failed-files.json
-  ```
+* `--dry-run`
+* `--parallel[=n]`
+* `--output-dir <path>`
+* `--model <name>`
+* `--temperature <value>`
+* `--no-save`
 
-### 4.2 Summary Reporting
-- [ ] Generate JSON summary with:
-  - Total files found
-  - Successfully processed count
-  - Failed processing count
-  - Processing time per file
-  - Overall execution time
-- [ ] Optional HTML report generation
-- [ ] Integration with existing `generate:context` script
+## Phase 4: Output & Reporting
 
-## Phase 5: Error Handling and Validation
+### 4.1 Output Directory Structure
+
+```
+results/
+└─ agent-tasks/
+   └─ 2025-07-07-13-30-00/
+      ├─ summary.json
+      ├─ processed/
+      ├─ errors.json
+```
+
+### 4.2 Reporting and Integration
+
+* Console summary: successes, failures, path
+* Optional integration into generate\:context
+* Add cleanup script: `npm run clean-agent-task-results`
+
+## Phase 5: Error Handling & Validation
 
 ### 5.1 Robust Error Handling
-- [ ] Network connectivity issues
-- [ ] API rate limiting
-- [ ] Invalid file formats
-- [ ] Permission errors
-- [ ] Missing dependencies
+
+* Handle:
+
+  * Network/API failures (e.g., 429, timeouts)
+  * File read/write issues
+  * CLI install or auth errors
+  * SIGINT for graceful shutdown
 
 ### 5.2 Input Validation
-- [ ] Validate `AGENT_IMPLEMENTATION_TASK.md` file format
-- [ ] Check file size limits
-- [ ] Verify API key validity before processing
-- [ ] Validate output directory permissions
 
-## Phase 6: Documentation and Testing
+* Ensure files match pattern
+* Validate Node.js version and API key
+* Confirm output directory is writable
+* Sanity-check flag combinations (e.g., `--dry-run` + `--parallel`)
+* Throttle parallelism to avoid exceeding rate limits
 
-### 6.1 Documentation Updates
-- [ ] Update main README.md with Gemini CLI setup instructions
-- [ ] Create `docs/gemini-integration.md` with detailed usage guide
-- [ ] Add troubleshooting section
-- [ ] Document environment variable requirements
+## Phase 6: Documentation & Testing
+
+### 6.1 Documentation
+
+* **README.md**:
+
+  * Setup instructions
+  * Example usage
+* **.env.example**:
+
+  ```bash
+  GEMINI_API_KEY=your_key
+  GEMINI_MODEL=gemini-2.5-pro
+  GEMINI_TEMPERATURE=0.7
+  ```
+* **docs/gemini-integration.md**:
+
+  * In-depth usage and troubleshooting
 
 ### 6.2 Testing Strategy
-- [ ] Create test `AGENT_IMPLEMENTATION_TASK.md` files in test directories
-- [ ] Unit tests for file discovery logic
-- [ ] Integration tests for CLI wrapper (with mocked API)
-- [ ] End-to-end testing with real Gemini API (optional)
 
-## Phase 7: Advanced Features (Future Enhancements)
+* Unit test file discovery
+* Stub/mock CLI execution for tests
+* Manual integration test with sample files
+* Test edge cases and CI dry-run
 
-### 7.1 Configuration Management
-- [ ] Support for custom prompt templates
-- [ ] Model selection per file type
-- [ ] Custom output formatting options
-- [ ] Workflow-specific processing rules
+## Phase 7: Future Enhancements
 
-### 7.2 Integration Enhancements
-- [ ] Git hooks for automatic processing on commit
-- [ ] CI/CD integration for automated task processing
-- [ ] Watch mode for real-time processing
-- [ ] Integration with existing NX workspace tools
+### 7.1 Configuration & Flexibility
+
+* Use `config/gemini/config.json`
+* Add support for custom prompt templates
+* Allow per-file model selection
+* Consider structured (JSON) output prompts
+
+### 7.2 Workflow Integration
+
+* Git hooks (pre-commit or pre-push)
+* CI/CD integration (e.g., PR comments with results)
+* Watch mode with `chokidar`
+* Enable MCP support if advanced capabilities are needed
 
 ## Technical Considerations
 
-### Dependencies to Add
+### Dependencies
+
 ```json
 {
-  "dependencies": {
-    "@google-ai/generativelanguage": "^2.x.x",
-    "chalk": "^5.x.x",
+  "devDependencies": {
+    "@google/gemini-cli": "^0.1.9",
     "glob": "^10.x.x",
+    "chalk": "^5.x.x",
     "yargs": "^17.x.x"
   }
 }
 ```
 
-### Environment Variables Required
-```
-GEMINI_API_KEY=your_api_key_here
-GEMINI_MODEL=gemini-pro
-GEMINI_MAX_TOKENS=2048
-GEMINI_TEMPERATURE=0.7
-```
+### Environment Variables
 
-### File Structure After Implementation
+* `GEMINI_API_KEY` (required)
+* `GEMINI_MODEL` (optional)
+* `GEMINI_TEMPERATURE` (optional)
+* `GEMINI_MAX_TOKENS` (optional)
+
+### Logging & Metrics
+
+* Include `--verbose` flag
+* Log token usage (if supported)
+* Add to summary.json
+
+## File Structure (Post-Implementation)
+
 ```
-scripts/
-  find-agent-tasks.js
-  gemini-processor.js
-  process-agent-tasks.js
-  utils/
-    file-discovery.js
-    cli-wrapper.js
-    output-formatter.js
-config/
-  gemini/
-    cli-config.json
-    prompts/
-      default-agent-task.md
-results/
-  agent-tasks/
-    .gitkeep
-docs/
-  gemini-integration.md
+project-root/
+├─ scripts/
+│   ├─ find-agent-tasks.js
+│   ├─ gemini-processor.js
+│   └─ process-agent-tasks.js
+├─ results/
+│   └─ agent-tasks/
+│       ├─ 2025-07-07-13-30-00/
+│       │    ├─ summary.json
+│       │    ├─ processed/
+│       │    └─ errors.json
+├─ docs/
+│   ├─ gemini-integration.md
+├─ .env.example
+└─ package.json
 ```
 
 ## Success Criteria
-- [ ] Successfully install and configure Gemini CLI
-- [ ] Automatically discover all `AGENT_IMPLEMENTATION_TASK.md` files in repository
-- [ ] Process each file through Gemini CLI without manual intervention
-- [ ] Generate comprehensive output and summary reports
-- [ ] Provide clear error messages and recovery instructions
-- [ ] Documentation complete and accessible
-- [ ] Integration with existing development workflow
+
+* ✅ Automated discovery of all task files
+* ✅ Successful AI processing using Gemini CLI
+* ✅ Runs in CI/non-interactive mode with API key
+* ✅ Output artifacts stored and traceable
+* ✅ Summary and console output is clear
+* ✅ Documentation supports onboarding
+* ✅ Existing workflows not broken
+* ✅ Agent tasks meaningfully accelerated by AI
 
 ## Estimated Timeline
-- Phase 1-2: 2-3 days (research and core implementation)
-- Phase 3-4: 1-2 days (CLI integration and output)
-- Phase 5-6: 1-2 days (error handling and documentation)
-- Total: 4-7 days depending on Gemini CLI complexity and API requirements
+
+| Phase | Description                           | Duration   |
+| ----- | ------------------------------------- | ---------- |
+| 1-2   | Research, Setup, Basic Implementation | \~2 days   |
+| 3-4   | Scripts & Output Handling             | \~1 day    |
+| 5     | Error Handling                        | \~0.5 day  |
+| 6     | Docs & Testing                        | \~1.5 days |
+| 7     | Advanced Features (optional/future)   | N/A        |
+
+> **Total Estimate**: \~4–5 days for core integration
