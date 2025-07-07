@@ -35,29 +35,36 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 
 ### What's Missing
 
-#### 1. **Frontend Integration** 📱 **NEXT UP**
+#### 1. **Gemini CLI Integration** 🤖 **CURRENT**
+- [ ] Install Gemini CLI and configure authentication
+- [ ] Create scripts to discover `AGENT_IMPLEMENTATION_TASK.md` files
+- [ ] Build non-interactive processing pipeline
+- [ ] Add NPM commands for task automation
+- [ ] Generate instructions for agent workflow optimization
+
+#### 2. **Frontend Integration** 📱
 - [ ] Replace default Vite app with actual items management UI
 - [ ] Add API service layer using fetch or axios
 - [ ] Connect frontend to backend Items API
 - [ ] Create forms for Create/Update operations
 - [ ] Display items list with Delete functionality
 
-#### 2. **API Client Generation** 🔧
+#### 3. **API Client Generation** 🔧
 - [ ] Add OpenAPI client generation
 - [ ] Create `npm run generate:client` script  
 - [ ] Set up automated type sync between backend and frontend
 
-#### 3. **Enhanced Development Workflow** 🔧
+#### 4. **Enhanced Development Workflow** 🔧
 - [ ] Add database integration example (SQLite for simplicity)
 - [ ] Create example e2e tests
 - [ ] Add comprehensive development environment setup documentation
 
-#### 4. **Documentation & Examples** �
+#### 5. **Documentation & Examples** 📚
 - [ ] Create example business logic beyond basic CRUD
 - [ ] Add comprehensive API documentation examples
 - [ ] Document best practices for AI-assisted development
 
-#### 5. **Production Readiness** �
+#### 6. **Production Readiness** 🚀
 - [ ] Add Docker setup for containerization
 - [ ] Environment configuration management
 - [ ] Build optimization and deployment scripts
@@ -66,21 +73,26 @@ Fork this repo to quickly bootstrap new projects with AI agent-friendly conventi
 
 ## 🚀 Current Focus
 
-**Frontend Integration** - Connecting the React frontend to the existing Items API to create a complete working application.
+**Gemini CLI Integration** - Building automated AI agent task processing pipeline to discover and process `AGENT_IMPLEMENTATION_TASK.md` files throughout the repository.
 
 ### Next Major Milestones
 
-#### 1. **Complete Frontend** (Current) 📱
+#### 1. **AI Agent Automation** (Current) 🤖
+- [ ] Integrate Gemini CLI for automated task processing
+- [ ] Build file discovery and processing scripts
+- [ ] Create instruction generation pipeline
+
+#### 2. **Complete Frontend** 📱
 - [ ] Build Items management UI with CRUD operations
 - [ ] Connect to existing API endpoints
 - [ ] Add proper error handling and loading states
 
-#### 2. **Enhanced Features** 🔧
+#### 3. **Enhanced Features** 🔧
 - [ ] Add client-side form validation
 - [ ] Implement search and filtering
 - [ ] Add pagination for large datasets
 
-#### 3. **Production Patterns** 🚀
+#### 4. **Production Patterns** 🚀
 - [ ] Add authentication examples
 - [ ] Implement deployment strategies
 - [ ] Add monitoring and observability patterns

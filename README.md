@@ -2,7 +2,7 @@
 
 **A forkable boilerplate repository designed to be maximally effective for AI-assisted development.**
 
-This template provides a production-ready foundation with conventions that help AI agents understand, navigate, and modify code efficiently.
+This template provides a production-ready foundation with conventions that help AI agents understand, navigate, and modify code efficiently. Built with automated AI agent task processing and instruction generation capabilities.
 
 ## 🛠️ Tech Stack
 
@@ -10,6 +10,7 @@ This template provides a production-ready foundation with conventions that help 
 - **Backend**: NestJS with TypeScript, Swagger/OpenAPI docs
 - **Frontend**: React + Vite with TypeScript
 - **Shared**: Contracts library for type-safe API communication
+- **AI Integration**: Gemini CLI for automated agent task processing
 - **Package Manager**: pnpm
 - **Testing**: Jest
 - **Linting**: ESLint with TypeScript support
@@ -27,13 +28,19 @@ This template provides a production-ready foundation with conventions that help 
 
 ## 🎯 Next Steps
 
-### Immediate - Frontend Development 📱
+### Immediate - AI Agent Automation 🤖
+1. **Gemini CLI Integration** - Install and configure Gemini CLI for automated task processing
+2. **Agent Task Discovery** - Build scripts to find and process `AGENT_IMPLEMENTATION_TASK.md` files
+3. **Instruction Generation** - Automated pipeline for agent workflow optimization
+4. **Non-Interactive Processing** - Command-line automation for batch AI agent tasks
+
+### Soon - Frontend Development 📱
 1. **Connect Frontend to API** - Build Items management UI with CRUD operations
 2. **Add API Client Generation** - Generate TypeScript clients from OpenAPI spec
 3. **Enhanced UX** - Add form validation, loading states, and error handling
 4. **Testing** - Add comprehensive frontend and integration tests
 
-### Soon
+### Later
 1. Add database integration example (SQLite for simplicity)
 2. Create example business logic beyond basic CRUD
 3. Add authentication and authorization patterns
@@ -94,8 +101,11 @@ itty-bitty-context/
 
 ## 🤖 AI-Friendly Features
 
-This template is optimized for AI-assisted development:
+This template is optimized for AI-assisted development with automated agent task processing:
 
+- **Gemini CLI Integration** - Automated discovery and processing of agent implementation tasks
+- **Agent Task Files** - Standardized `AGENT_IMPLEMENTATION_TASK.md` format for AI workflow automation
+- **Instruction Generation Pipeline** - Automated creation of context-aware development instructions
 - **Clear, consistent naming conventions** across all layers
 - **OpenAPI-first API design** with live documentation
 - **Shared type contracts** between frontend and backend
@@ -124,10 +134,25 @@ When running the API server, visit:
 
 ## 📝 Development Workflow
 
-1. **Backend First**: Define your API endpoints and DTOs in `apps/api-core`
-2. **Contracts**: Export shared types from `libs/contracts`
-3. **Frontend**: Consume the API using generated or manual client code
-4. **Test**: Write tests for both API endpoints and business logic
+1. **AI Agent Tasks**: Define automation tasks in `AGENT_IMPLEMENTATION_TASK.md` files
+2. **Automated Processing**: Use Gemini CLI integration to process tasks automatically
+3. **Backend First**: Define your API endpoints and DTOs in `apps/api-core`
+4. **Contracts**: Export shared types from `libs/contracts`
+5. **Frontend**: Consume the API using generated or manual client code
+6. **Test**: Write tests for both API endpoints and business logic
+
+## 🔧 AI Agent Commands
+
+```bash
+# Discover agent implementation tasks
+npm run find-agent-tasks
+
+# Process all agent tasks with Gemini CLI
+npm run process-agent-tasks
+
+# Generate development instructions
+npm run generate:instructions
+```
 
 ## 📚 AI Agent Documentation
 
