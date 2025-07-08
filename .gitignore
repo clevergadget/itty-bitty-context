@@ -33,7 +33,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-
+/scripts/set-gemini-key.sh
 # Environment files
 .env
 .env.local
