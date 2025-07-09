@@ -15,6 +15,8 @@
     "lint": "nx lint api-core && nx lint web-shell && nx lint contracts",
     "typecheck": "nx typecheck api-core && nx typecheck contracts",
     "generate:context": "node scripts/generate-project-context.js",
+    "gemini": "node scripts/run-gemini.js",
+    "gemini:auth": "gemini",
     "kill": "lsof -ti:3000,4200 | xargs kill -9 2>/dev/null || true"
   },
   "private": true,

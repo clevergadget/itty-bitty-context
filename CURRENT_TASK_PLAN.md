@@ -4,38 +4,10 @@
 
 ### 1.1 Gemini CLI Overview & Installation DONE
 
-* **Identify the correct package**: Use `@google/gemini-cli` (not `@google-ai/generativelanguage`).
-* **Verify system requirements**: Ensure Node.js v20+ is installed.
-* **Install the CLI**:
 
-  * Locally: `npm install @google/gemini-cli`
-  * Globally: `npm install -g @google/gemini-cli`
-* **Test the CLI**:
+### 1.2 Authentication & Configuration DONE ✅
+Authentication is by sourcing the .env to set the api key for gemini
 
-  * Run `gemini --help`
-  * Run a sample prompt: `gemini "Hello, world?"`
-
-### 1.2 Authentication & Configuration NEXT
-
-* **Obtain API credentials**:
-
-  * Generate a Gemini API key from Google AI Studio.
-* **Set up environment variables**:
-
-  ```bash
-  GEMINI_API_KEY=your_api_key_here
-  ```
-* **Interactive login (optional)**:
-
-  * If no API key is set, CLI prompts for sign-in.
-* **Model configuration**:
-
-  * Default: Gemini 2.5 Pro.
-  * Use `--model <model_name>` to override.
-* **Optional parameters**:
-
-  * Customize with `--temperature`, etc.
-  * Can read from env vars like `GEMINI_TEMPERATURE`, `GEMINI_MAX_TOKENS`.
 
 ## Phase 2: Core Implementation
 
